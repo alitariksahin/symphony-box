@@ -86,7 +86,6 @@ async function main() {
   intro(chalk.cyan("Symphony Box Setup"));
 
   const upstashBoxApiKey = await promptText("Upstash Box API key", "UPSTASH_BOX_API_KEY", opts.upstashBoxApiKey);
-
   const openaiApiKey = await promptText("OpenAI API key", "OPENAI_API_KEY", opts.openaiApiKey, "sk-...");
   const linearApiKey = await promptText("Linear API key", "LINEAR_API_KEY", opts.linearApiKey, "lin_api_...");
   const githubToken = await promptText("GitHub token (requires read/write access for contents and pull requests)", "GITHUB_TOKEN", opts.githubToken, "ghp_...");

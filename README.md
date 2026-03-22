@@ -1,6 +1,6 @@
-# @upstash/symphony-box
+# symphony-box
 
-CLI to set up [Symphony](https://github.com/odysseus0/symphony) (OpenAI Codex orchestrator) on an [Upstash Box](https://upstash.com/docs/box/overall/getstarted) for a GitHub repo connected to a Linear project.
+CLI to set up [Symphony](https://github.com/openai/symphony) (OpenAI Codex orchestrator) on an [Upstash Box](https://upstash.com/docs/box/overall/getstarted) for a GitHub repo connected to a Linear project.
 
 ## What it does
 
@@ -16,7 +16,7 @@ Once running, Symphony polls your Linear project and autonomously works on ticke
 ## Usage
 
 ```bash
-npx @upstash/symphony-box
+npx symphony-box
 ```
 
 You will be prompted for:

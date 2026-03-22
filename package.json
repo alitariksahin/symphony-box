@@ -1,5 +1,5 @@
 {
-  "name": "@upstash/symphony-box",
+  "name": "symphony-box",
   "version": "1.0.0",
   "description": "CLI to set up Symphony (OpenAI Codex orchestrator) on an Upstash Box for a GitHub repo",
   "type": "module",
@@ -20,6 +20,10 @@
     "cli",
     "linear"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alitariksahin/symphony-box.git"
+  },
   "license": "MIT",
   "engines": {
     "node": ">=18"

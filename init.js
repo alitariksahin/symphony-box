@@ -1,7 +1,7 @@
 import { Box } from "@upstash/box";
 import { buildWorkflow } from "./workflow.js";
 
-const SYMPHONY_URL = "https://github.com/odysseus0/symphony";
+const SYMPHONY_URL = "https://github.com/openai/symphony.git";
 const MISE = "/home/boxuser/.local/bin/mise";
 
 async function linearQuery(linearApiKey, query, variables) {
