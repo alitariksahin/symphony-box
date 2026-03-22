@@ -1,6 +1,6 @@
 {
   "name": "symphony-box",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CLI to set up Symphony (OpenAI Codex orchestrator) on an Upstash Box for a GitHub repo",
   "type": "module",
   "bin": {
