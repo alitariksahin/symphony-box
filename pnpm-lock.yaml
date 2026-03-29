@@ -12,8 +12,8 @@ importers:
         specifier: ^0.11.0
         version: 0.11.0
       '@upstash/box':
-        specifier: latest
-        version: 0.1.23(zod@4.3.6)
+        specifier: ^0.1.30
+        version: 0.1.30(zod@4.3.6)
       chalk:
         specifier: ^5.4.1
         version: 5.6.2
@@ -29,8 +29,8 @@ packages:
   '@clack/prompts@0.11.0':
     resolution: {integrity: sha512-pMN5FcrEw9hUkZA4f+zLlzivQSeQf5dRGJjSUbvVYDLvpKCdQx5OaknvKzgbtXOizhP+SJJJjqEbOe55uKKfAw==}
 
-  '@upstash/box@0.1.23':
-    resolution: {integrity: sha512-Md2thDxe7iyRPv8PijohwjVl+YBHcRlyWCHHPEj6xSyz6t1+guUz8FD+eClvJi38NXPZZt00bnFS12xDEFxWXw==}
+  '@upstash/box@0.1.30':
+    resolution: {integrity: sha512-7KZRoORH24aNCtaUzA/239cZMeJiJ+l1s3gL9brdwDmtxkeWF8KnmBGWScDFQjos1cy9EUUL/lITxUuQuBnnEg==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       zod: ^3.25.0 || ^4.0.0
@@ -70,7 +70,7 @@ snapshots:
       picocolors: 1.1.1
       sisteransi: 1.0.5
 
-  '@upstash/box@0.1.23(zod@4.3.6)':
+  '@upstash/box@0.1.30(zod@4.3.6)':
     dependencies:
       zod: 4.3.6
       zod-to-json-schema: 3.25.1(zod@4.3.6)

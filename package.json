@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@clack/prompts": "^0.11.0",
-    "@upstash/box": "latest",
+    "@upstash/box": "^0.1.30",
     "chalk": "^5.4.1",
     "commander": "^14.0.0"
   }
