@@ -136,7 +136,7 @@ export async function run_init(
   // Ping the box to keep it alive
   await box.schedule.exec({
     cron: "0 */2 * * *",
-    command: ["bash", "-c", "true"],
+    command: ["sh", "-c", ":"],
   });
 
   return { boxId: box.id, stream };
