@@ -27,7 +27,7 @@ const REQUIRED_STATES = [
 async function setupLinear(linearApiKey, projectName, onMissingStates) {
   const data = await linearQuery(
     linearApiKey,
-    `{ projects { nodes { name slugId teams { nodes { id } } } } }`
+    `{ projects { nodes { name slugId teams { nodes { id } } } } }`,
   );
   const project = data.projects.nodes.find((p) => p.name === projectName);
   if (!project) throw new Error(`Linear project "${projectName}" not found`);
@@ -36,7 +36,7 @@ async function setupLinear(linearApiKey, projectName, onMissingStates) {
 
   const statesData = await linearQuery(
     linearApiKey,
-    `{ workflowStates { nodes { name team { id } } } }`
+    `{ workflowStates { nodes { name team { id } } } }`,
   );
   const existing = statesData.workflowStates.nodes
     .filter((s) => s.team?.id === teamId)
@@ -60,7 +60,7 @@ async function setupLinear(linearApiKey, projectName, onMissingStates) {
             type: "started",
             color: state.color,
           },
-        }
+        },
       );
     }
   }
@@ -78,13 +78,13 @@ export async function run_init(
     repoName,
     linearProjectName,
   },
-  { onStep = () => {}, onMissingStates = async () => true } = {}
+  { onStep = () => {}, onMissingStates = async () => true } = {},
 ) {
   onStep("linear", "Checking Linear project and workflow states...");
   const { slugId } = await setupLinear(
     linearApiKey,
     linearProjectName,
-    onMissingStates
+    onMissingStates,
   );
 
   onStep("workflow", `Building WORKFLOW.md (slug: ${slugId})...`);
@@ -100,7 +100,7 @@ export async function run_init(
 
   onStep("deps", `Box ${box.id} — installing system dependencies...`);
   await box.exec.command(
-    "sudo apk add --no-cache git github-cli build-base perl bison ncurses-dev openssl-dev libssh-dev unixodbc-dev libxml2-dev"
+    "sudo apk add --no-cache git github-cli build-base perl bison ncurses-dev openssl-dev libssh-dev unixodbc-dev libxml2-dev",
   );
 
   onStep("codex", "Installing Codex...");
@@ -123,15 +123,21 @@ export async function run_init(
   onStep("build", "Cloning and building Symphony (~5 mins)...");
   await box.exec.command(`git clone ${SYMPHONY_URL}`);
   await box.exec.command(
-    `cd symphony/elixir && ${MISE} trust && ${MISE} install`
+    `cd symphony/elixir && ${MISE} trust && ${MISE} install`,
   );
   await box.exec.command(`cd symphony/elixir && ${MISE} exec -- mix setup`);
   await box.exec.command(`cd symphony/elixir && ${MISE} exec -- mix build`);
 
   onStep("run", "Starting Symphony...");
   const stream = await box.exec.stream(
-    `cd symphony/elixir && ${MISE} exec -- ./bin/symphony /workspace/home/${repoName}/WORKFLOW.md --i-understand-that-this-will-be-running-without-the-usual-guardrails`
+    `cd symphony/elixir && ${MISE} exec -- ./bin/symphony /workspace/home/${repoName}/WORKFLOW.md --i-understand-that-this-will-be-running-without-the-usual-guardrails`,
   );
+
+  // Ping the box to keep it alive
+  await box.schedule.exec({
+    cron: "0 */2 * * *",
+    command: ["sh", "-c", ":"],
+  });
 
   return { boxId: box.id, stream };
 }
