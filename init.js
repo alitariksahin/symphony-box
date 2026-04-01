@@ -100,7 +100,7 @@ export async function run_init(
 
   onStep("deps", `Box ${box.id} — installing system dependencies...`);
   await box.exec.command(
-    "sudo apk add --no-cache git github-cli build-base perl bison ncurses-dev openssl-dev libssh-dev unixodbc-dev libxml2-dev",
+    "sudo apt-get update && sudo apt-get install -y gh build-essential bison libncurses-dev libssl-dev libssh-dev unixodbc-dev libxml2-dev",
   );
 
   onStep("codex", "Installing Codex...");
