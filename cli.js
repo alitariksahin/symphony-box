@@ -93,12 +93,19 @@ async function main() {
   const { repoUrl, repoName } = await pickRepo(githubToken);
   const linearProjectName = await pickLinearProject(linearApiKey);
 
+  const keepAlive = checkCancel(
+    await confirm({
+      message: "Keep the box alive for production? (recommended — box stays running even when idle; otherwise it freezes after inactivity)",
+      initialValue: true,
+    })
+  );
+
   const s = spinner();
   s.start("Starting...");
 
   try {
     const { boxId, stream } = await run_init(
-      { upstashBoxApiKey, openaiApiKey, linearApiKey, githubToken, repoUrl, repoName, linearProjectName },
+      { upstashBoxApiKey, openaiApiKey, linearApiKey, githubToken, repoUrl, repoName, linearProjectName, keepAlive },
       {
         onStep: (_step, message) => s.message(message),
         onMissingStates: async (missing) => {

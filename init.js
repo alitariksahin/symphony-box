@@ -77,6 +77,7 @@ export async function run_init(
     repoUrl,
     repoName,
     linearProjectName,
+    keepAlive = false,
   },
   { onStep = () => {}, onMissingStates = async () => true } = {},
 ) {
@@ -94,6 +95,7 @@ export async function run_init(
   const box = await Box.create({
     apiKey: upstashBoxApiKey,
     runtime: "node",
+    keepAlive,
     git: { token: githubToken },
     env: { LINEAR_API_KEY: linearApiKey, OPENAI_API_KEY: openaiApiKey },
   });
@@ -133,11 +135,11 @@ export async function run_init(
     `cd symphony/elixir && ${MISE} exec -- ./bin/symphony /workspace/home/${repoName}/WORKFLOW.md --i-understand-that-this-will-be-running-without-the-usual-guardrails`,
   );
 
-  // Ping the box to keep it alive
-  await box.schedule.exec({
-    cron: "0 */2 * * *",
-    command: ["sh", "-c", ":"],
-  });
+  if (keepAlive) {
+    await box.setInitCommand(
+      `cd symphony/elixir && ${MISE} exec -- ./bin/symphony /workspace/home/${repoName}/WORKFLOW.md --i-understand-that-this-will-be-running-without-the-usual-guardrails`,
+    );
+  }
 
   return { boxId: box.id, stream };
 }
